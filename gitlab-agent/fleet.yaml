@@ -28,8 +28,6 @@ targetCustomizations:
       version: 2.21.0
       valuesFiles:
         - agent-values.yaml
-    kustomize:
-      dir: additional
 
 dependsOn:
   - name: external-secrets

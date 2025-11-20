@@ -1,13 +1,6 @@
 image:
   tag: "v18.2.0"
 
-rbac:
-  create: false
-
-serviceAccount:
-  create: false
-  name: gitlab-agent
-
 podSecurityContext:
   runAsUser: 1000
   runAsGroup: 3000
