@@ -3,5 +3,7 @@ ci_access:
     - id: oit/k8s
 
 user_access:
+  access_as:
+    agent: {}
   groups:
     - id: oit/k8s
