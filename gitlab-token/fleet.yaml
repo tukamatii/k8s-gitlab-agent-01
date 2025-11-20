@@ -1,18 +1,17 @@
 # fleet.yaml
 
-defaultNamespace: prom-cilium
+defaultNamespace: gitlab-token
 
 namespaceLabels:
   okbtsp.corp/department: OIT
   okbtsp.corp/owner: baranav
-  okbtsp.corp/project: prom-cilium
-  prom-config: prom-operator-main
+  okbtsp.corp/project: gitlab-token
 
 helm:
   takeOwnership: true
   force: true
 
-name: prom-cilium
+name: gitlab-token
 
 kustomize:
   dir: "base"
