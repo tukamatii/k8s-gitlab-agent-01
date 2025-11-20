@@ -35,7 +35,7 @@ affinity:
               values: [""]
 
 config:
-  kasAddress: ws://gitlab.okbtsp.corp/-/kubernetes-agent/
+  kasAddress: wss://gitlab.okbtsp.corp/-/kubernetes-agent/
   secretName: agent-secret
   kasCaCert: |
     -----BEGIN CERTIFICATE-----
