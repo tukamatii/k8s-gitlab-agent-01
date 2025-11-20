@@ -1,0 +1,35 @@
+# fleet.yaml
+defaultNamespace: gitlab-agent
+
+namespaceLabels:
+  okbtsp.corp/department: OIT
+  okbtsp.corp/owner: baranav
+  okbtsp.corp/project: gitlab-agent
+
+name: gitlab-agent
+
+helm:
+  takeOwnership: true
+kustomize:
+  dir: base
+# Кастомизация под кластеры
+targetCustomizations:
+  # === PROD ===
+  - name: prod
+    clusterSelector:
+      matchLabels:
+        okbtsp.corp/department: OIT
+        okbtsp.corp/owner: baranav
+        okbtsp.corp/template: talos-vmware
+    helm:
+      takeOwnership: true
+      chart: gitlab-agent
+      repo: https://charts.gitlab.io
+      version: 2.21.0
+      valuesFiles:
+        - agent-values.yaml
+
+dependsOn:
+  - name: external-secrets
+  - name: prom-operator
+  - name: gitlab-token

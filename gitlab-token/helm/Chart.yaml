@@ -1,0 +1,4 @@
+apiVersion: v2
+name: mychart
+description: Minimal chart to demo Fleet clusterName templating
+version: 0.1.0

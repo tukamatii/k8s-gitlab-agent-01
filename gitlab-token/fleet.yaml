@@ -1,4 +1,5 @@
 # fleet.yaml
+
 defaultNamespace: gitlab-agent
 
 namespaceLabels:
@@ -6,31 +7,30 @@ namespaceLabels:
   okbtsp.corp/owner: baranav
   okbtsp.corp/project: gitlab-agent
 
-name: gitlab-agent
-
 helm:
   takeOwnership: true
+  force: true
+
+name: gitlab-token
+
 kustomize:
-  dir: base
+  dir: "base"
+
 # Кастомизация под кластеры
 targetCustomizations:
   # === PROD ===
   - name: prod
     clusterSelector:
       matchLabels:
-        okbtsp.corp/department: OIT
-        okbtsp.corp/owner: baranav
         okbtsp.corp/template: talos-vmware
     helm:
       takeOwnership: true
-      chart: gitlab-agent
-      repo: https://charts.gitlab.io
-      version: 2.21.0
-      valuesFiles:
-        - agent-values.yaml
-    kustomize:
-      dir: additional
+      force: true
+      chart: ./helm
+      values:
+        clusterName: ${ if hasKey .ClusterLabels "management.cattle.io/cluster-display-name" }${ get .ClusterLabels "management.cattle.io/cluster-display-name" }${ else }${ .ClusterName }${ end }
 
 dependsOn:
   - name: external-secrets
+  - name: mimir
   - name: prom-operator

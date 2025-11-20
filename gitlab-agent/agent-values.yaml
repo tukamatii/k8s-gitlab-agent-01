@@ -1,13 +1,6 @@
 image:
   tag: "v18.2.0"
 
-rbac:
-  create: false
-
-serviceAccount:
-  create: false
-  name: gitlab-agent
-
 podSecurityContext:
   runAsUser: 1000
   runAsGroup: 3000
@@ -35,8 +28,8 @@ affinity:
               values: [""]
 
 config:
-  kasAddress: ws://gitlab.okbtsp.corp/-/kubernetes-agent/
-  secretName: 
+  kasAddress: wss://gitlab.okbtsp.corp/-/kubernetes-agent/
+  secretName: agent-secret
   kasCaCert: |
     -----BEGIN CERTIFICATE-----
     MIIFxjCCA66gAwIBAgITEwAAAAfYBWHRqjIGSQAAAAAABzANBgkqhkiG9w0BAQ0F

@@ -17,7 +17,8 @@ spec:
     force: true
   forceSyncGeneration: 2
   paths:
-    - manifest
+    - gitlab-token
+    - gitlab-agent
   pollingInterval: 1m0s
   repo: ssh://git@gitlab.okbtsp.corp:2222/oit/k8s/k8s-gitlab-agent-01.git
   targets:
