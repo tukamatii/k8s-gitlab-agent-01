@@ -1,9 +1,11 @@
 ci_access:
   groups:
     - id: oit/k8s
+    - id: oit/services
 
 user_access:
   access_as:
     agent: {}
   groups:
     - id: oit/k8s
+    - id: oit/services
