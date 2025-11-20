@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: gitlab-agent-oit
+  namespace: gitlab-agent
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: gitlab-agent-role
+  namespace: gitlab-agent
+rules:
+  # Core API
+  - apiGroups: [""]
+    resources: ["pods", "services", "endpoints", "configmaps", "secrets"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
+  # Namespaces (только чтение)
+  - apiGroups: [""]
+    resources: ["namespaces"]
+    verbs: ["get", "list", "watch"]
+
+  # Workloads
+  - apiGroups: ["apps"]
+    resources: ["deployments", "statefulsets", "daemonsets", "replicasets"]
+    verbs: ["*"]
+
+  - apiGroups: ["batch"]
+    resources: ["jobs", "cronjobs"]
+    verbs: ["*"]
+
+  # PVC — полный доступ
+  - apiGroups: [""]
+    resources: ["persistentvolumeclaims"]
+    verbs: ["*"]
+
+  # Prometheus Operator CRDs
+  - apiGroups: ["monitoring.coreos.com"]
+    resources:
+      - servicemonitors
+      - podmonitors
+      - prometheuses
+      - alertmanagers
+      - thanosrulers
+      - prometheusrules
+    verbs: ["*"]
+
+  # Gateway API (HTTPRoute, TCPRoute, UDPRoute)
+  - apiGroups: ["gateway.networking.k8s.io"]
+    resources: ["httproutes", "tcproutes", "udproutes"]
+    verbs: ["*"]
+
+  # External Secrets
+  - apiGroups: ["external-secrets.io"]
+    resources: ["externalsecrets"]
+    verbs: ["*"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: gitlab-agent-rolebinding
+  namespace: gitlab-agent
+subjects:
+  - kind: ServiceAccount
+    name: gitlab-agent-oit
+    namespace: gitlab-agent
+roleRef:
+  kind: Role
+  name: gitlab-agent-role
+  apiGroup: rbac.authorization.k8s.io
