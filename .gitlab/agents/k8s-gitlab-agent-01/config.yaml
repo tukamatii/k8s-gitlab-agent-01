@@ -5,8 +5,3 @@ ci_access:
 user_access:
   groups:
     - id: oit/k8s
-
-remote_development:
-  allow_privilege_escalation: true
-  enabled: true
-  use_kubernetes_user_namespaces: true
