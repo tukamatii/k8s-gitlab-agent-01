@@ -10,7 +10,7 @@ podSecurityContext:
 
 serviceAccount:
   create: false
-  name: gitlab-agent
+  name: gitlab-agent-oit
 rbac:
   create: false
 
