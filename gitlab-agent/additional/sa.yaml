@@ -70,3 +70,32 @@ roleRef:
   kind: Role
   name: gitlab-agent-role
   apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: gitlab-agent-view
+rules:
+  # Namespaces — только чтение
+  - apiGroups: [""]
+    resources: ["namespaces"]
+    verbs: ["get", "list", "watch"]
+
+  # Nodes — только чтение
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["get", "list", "watch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: gitlab-agent-view-binding
+subjects:
+  - kind: ServiceAccount
+    name: gitlab-agent-oit
+    namespace: gitlab-agent
+roleRef:
+  kind: ClusterRole
+  name: gitlab-agent-view
+  apiGroup: rbac.authorization.k8s.io
