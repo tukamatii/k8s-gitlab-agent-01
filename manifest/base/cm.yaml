@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: placeholder
+data:
+  placeholder.yaml: |
+    placeholder is nothing

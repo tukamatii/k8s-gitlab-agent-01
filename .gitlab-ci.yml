@@ -1,0 +1,13 @@
+---
+spec:
+  inputs:
+    name:
+      default: mega_linter
+---
+stages:
+  - test
+  - deploy
+  - docs
+
+include:
+  - component: $CI_SERVER_FQDN/oit/open-repositories/ci-cd-catalog/mega_linter@~latest
