@@ -1,12 +1,12 @@
 # fleet.yaml
-defaultNamespace: gitlab-token
+defaultNamespace: gitlab-agent
 
 namespaceLabels:
   okbtsp.corp/department: OIT
   okbtsp.corp/owner: baranav
-  okbtsp.corp/project: gitlab-token
+  okbtsp.corp/project: gitlab-agent
 
-name: gitlab-token
+name: gitlab-agent
 
 helm:
   takeOwnership: true
